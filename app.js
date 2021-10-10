@@ -2,31 +2,18 @@ const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
-// const expressHbs = require("express-handlebars");
+
+const db = require("./util/database");
 
 const app = express();
-
-// app.engine(
-//   "hbs",
-//   expressHbs({
-//     layoutsDir: "views/layouts/",
-//     defaultLayout: "main-layout",
-//     extname: "hbs",
-//   })
-// ); //hbs is not supported out of the box
-
-// app.set("view engine", "hbs");
-// app.set("views", "views");
-
-// app.set('view engine', 'pug');
-// app.set('views', 'views');
 
 app.set("view engine", "ejs");
 app.set("views", "views");
 
+const errorController = require("./controllers/error");
+
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
-const errorController = require('./controllers/error');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
